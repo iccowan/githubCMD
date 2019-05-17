@@ -7,10 +7,11 @@ By Ian Cowan
 
 Installation
 ------------
-- Download the jar file and run for the first time to create the config.properties file
-- Put your GitHub API Key into the config file
+- Download the jar file
 - In the github.bat file, change `[java.exe Path]` to your java.exe file, and change `[githubCMD.jar Path]` to the path of the downloaded jar file
 - Add the github.bat file to `C:\Windows\System32`
+- Run `github create` to initialize the config.properties file
+- Put your GitHub API Key into the config file
 - Now to add a GitHub repository, type `github create` in the command line and follow the prompts
 - Finally, the SSH and HTTP URLs will be displayed to add as your remote to your project
 
