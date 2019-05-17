@@ -5,7 +5,8 @@ package com.iccowan.githubcmd;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    // Create a repo
+    private static void create() {
         System.out.println("Create a GitHub Repository");
         // Get the user inputs
         Scanner in = new Scanner(System.in);
@@ -47,5 +48,18 @@ public class Main {
         System.out.println("Created successfully!");
         System.out.println("SSH URL: " + request.getSSHurl());
         System.out.println("HTTP URL: " + request.getHTTPurl());
+    }
+
+    public static void main(String[] args) {
+        // Check to see what the command was if there was one
+        if(1 > args.length) {
+            // Print the commands and their descriptions
+            System.out.println("GitHub Commands:");
+            System.out.println("create - 'github create' - Create a repository.");
+        } else {
+            if (args[0].equals("create")) {
+                create();
+            }
+        }
     }
 }
