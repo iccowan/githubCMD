@@ -2,3 +2,4 @@
 config.properties
 githubCMD.iml
 dependency-reduced-pom.xml
+target/*
