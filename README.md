@@ -1,5 +1,5 @@
-GitHub CMD
-==========
+GitHub CMD - v1.0
+=================
 
 By Ian Cowan
 
