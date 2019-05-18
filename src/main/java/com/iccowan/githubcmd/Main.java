@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     // Create a repo
-    private static void create() {
+    private static void create(Config configFile) {
         System.out.println("Create a GitHub Repository");
         // Get the user inputs
         Scanner in = new Scanner(System.in);
@@ -42,7 +42,7 @@ public class Main {
 
         // Create the Repo
         System.out.println("Creating the repository...");
-        PostRequest request = new PostRequest(name, desc, web, privB);
+        PostRequestCreate request = new PostRequestCreate(configFile, name, desc, web, privB);
 
         // Print the SSH and HTTP URLs
         System.out.println("Created successfully!");
@@ -50,15 +50,41 @@ public class Main {
         System.out.println("HTTP URL: " + request.getHTTPurl());
     }
 
+    public static void delete(Config configFile) {
+        // Get the name of the repository to delete
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Repository Name: ");
+        String name = in.nextLine();
+
+        // Check and make sure the repository exists
+        Repository repo = new Repository(configFile);
+        boolean repoExists = repo.exists(name);
+    }
+
+    public static void printCommands() {
+        // Print the commands and their descriptions
+        System.out.println("GitHub Commands:");
+        System.out.println("create - 'github create' - Create a repository.");
+        System.out.println("createconfig - 'github createconfig' - Create the config.properties file.");
+    }
+
     public static void main(String[] args) {
+        // Make sure the config file exists
+        Config configFile = new Config();
+
         // Check to see what the command was if there was one
         if(1 > args.length) {
-            // Print the commands and their descriptions
-            System.out.println("GitHub Commands:");
-            System.out.println("create - 'github create' - Create a repository.");
+            printCommands();
         } else {
             if (args[0].equals("create")) {
-                create();
+                create(configFile);
+            } else if(args[0].equals("createconfig")) {
+                new Config();
+            } else if(args[0].equals("delete")) {
+                delete(configFile);
+            } else {
+                printCommands();
             }
         }
     }

@@ -8,57 +8,16 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 
-public class PostRequest {
+public class PostRequestCreate {
     // Variables
     String token;
     String sshURL;
     String httpURL;
 
-    // Gets the GitHub Private token from the config
-    // Inputs:
-    //  NONE
-    // Outputs:
-    //  String token
-    private static String getGitHubPrivate() {
-        // Set the token as empty string
-        String token = null;
-
-        try {
-            // Open the config file
-            File file = new File("config.properties");
-            InputStream config = new FileInputStream(file);
-
-            // Get the token property
-            Properties prop = new Properties();
-            prop.load(config);
-            token = prop.getProperty("github_api_key", null);
-            token = token.trim();
-        } catch(IOException e) {
-            //
-        }
-
-        if(token == null) {
-            try {
-                // If the config doesn't exist, create it
-                File file = new File("config.properties");
-                file.createNewFile();
-                OutputStream configOut = new FileOutputStream(file);
-                Properties prop = new Properties();
-
-                prop.setProperty("github_api_key", "");
-                prop.store(configOut, "GitHub API Developer Token (Personal Token)");
-            } catch(IOException e) {
-                System.out.println("No config file found and unable to create the config file.");
-            }
-        }
-
-        return token;
-    }
-
     // Construct
-    public PostRequest(String name, String desc, String web, String priv) {
+    public PostRequestCreate(Config configFile, String name, String desc, String web, String priv) {
         // Get the GitHub Private token from config
-        token = getGitHubPrivate();
+        token = configFile.getToken();
 
         if(token == null) {
             System.out.println("Config file created.");
